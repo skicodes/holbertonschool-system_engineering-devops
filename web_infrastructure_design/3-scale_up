@@ -1,0 +1,18 @@
+Scale Up
+
+Diagram
+User -> DNS -> HAproxy 1 + HAproxy 2 (cluster) -> Web Server -> Application Server -> Database Server
+
+What is added
+- One additional server: splits the infrastructure into separate tiers so each component has dedicated resources.
+- HAproxy configured as a cluster: removes the load balancer as a bottleneck and improves availability.
+- Split services: web server, application server, and database are placed on their own servers.
+
+Why these elements are added
+- Separate web server: handles HTTP requests efficiently.
+- Separate application server: runs application logic without competing with web or database workloads.
+- Separate database server: isolates data storage and improves performance and maintenance.
+- Load balancer cluster: distributes traffic and reduces single points of failure.
+
+Benefit
+- This design scales better because each layer can be scaled independently based on demand.
