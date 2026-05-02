@@ -1,0 +1,29 @@
+Distributed Web Infrastructure
+
+Diagram
+User -> DNS (www.foobar.com) -> HAproxy Load Balancer -> Nginx Server 1 / Nginx Server 2 -> Application Server 1 / Application Server 2 -> MySQL Primary -> MySQL Replica
+
+Why these elements are added
+- Load balancer: distributes traffic across multiple servers to improve availability and capacity.
+- Two web/application servers: provide redundancy and share the traffic load.
+- Primary-replica database: keeps one writable database and one copy for redundancy and reads.
+
+Load balancing
+- Algorithm: round robin.
+- How it works: each new request is sent to the next server in the list in a repeating cycle.
+
+Cluster mode
+- This is an active-active setup because both servers receive traffic at the same time.
+- Active-active means both nodes are serving requests.
+- Active-passive means one node is on standby until the active node fails.
+
+Database replication
+- The primary node accepts writes.
+- The replica node receives data from the primary and can be used for redundancy and reads.
+- The application writes to the primary and reads can be distributed depending on the design.
+
+Issues
+- SPOF still exists on the load balancer if only one is used.
+- No firewall means weak security.
+- No HTTPS means traffic is unencrypted.
+- No monitoring means failures and performance issues may go unnoticed.
