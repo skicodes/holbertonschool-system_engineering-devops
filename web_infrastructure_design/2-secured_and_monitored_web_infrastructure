@@ -1,0 +1,25 @@
+Secured and Monitored Web Infrastructure
+
+Diagram
+User -> DNS -> HAproxy -> Nginx Server 1 / Nginx Server 2 -> Application Server -> MySQL Primary/Replica
+Each server has its own firewall and monitoring client.
+HTTPS is terminated with an SSL certificate for www.foobar.com.
+
+Why these elements are added
+- Firewalls: restrict unwanted traffic and allow only required ports and services.
+- SSL certificate: enables HTTPS and encrypts traffic between the user and the site.
+- Monitoring clients: collect metrics and logs for a monitoring service such as Sumo Logic.
+
+Why HTTPS
+- HTTPS encrypts data in transit.
+- It protects credentials, sessions, and user data from interception and tampering.
+
+Monitoring
+- Monitoring is used to track uptime, load, traffic, errors, and resource usage.
+- The client on each server sends metrics to the monitoring service.
+- To monitor web server QPS, collect request counts over time and compute queries per second from the access logs or server metrics.
+
+Issues
+- SSL termination at the load balancer creates a trust boundary issue because traffic is decrypted before reaching backend servers.
+- Having only one MySQL server that accepts writes creates a bottleneck and a single point for write failures.
+- Putting the same components on every server increases complexity and can make scaling and maintenance harder if one tier is overloaded.
