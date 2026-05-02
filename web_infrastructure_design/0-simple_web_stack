@@ -1,0 +1,18 @@
+Simple Web Stack
+
+Diagram
+User -> DNS (www.foobar.com -> 8.8.8.8) -> Nginx Web Server -> Application Server -> MySQL Database
+
+Components
+- Server: a physical or virtual machine that provides resources and runs services.
+- Domain name: a human-readable name used to reach the server instead of an IP address.
+- DNS record (www): an A record that points www.foobar.com to the server IP address.
+- Web server: receives HTTP requests, serves static content, and forwards dynamic requests to the application server.
+- Application server: runs the application code and generates dynamic content.
+- Database: stores and manages persistent application data.
+- Communication protocol: the server and the user’s computer communicate over HTTP through the network.
+
+Issues
+- SPOF: if the single server fails, the website becomes unavailable.
+- Maintenance downtime: restarting the web server or deploying new code can make the site unavailable.
+- No scalability: the server cannot handle high traffic by adding more machines.
